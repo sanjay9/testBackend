@@ -3,5 +3,11 @@
     publish = "dist/"
     command = "npm run build"
     
-    /* /index.html 200
-/register /index.html
+    [[redirects]]
+  from = "/register"
+  to = "index.html"
+  status = 200
+  force = true
+  headers = {X-From = "Netlify"}
+    
+   
