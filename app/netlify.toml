@@ -2,3 +2,6 @@
     functions = "functions"
     publish = "dist/"
     command = "npm run build"
+    
+    /* /index.html 200
+/register /index.html
