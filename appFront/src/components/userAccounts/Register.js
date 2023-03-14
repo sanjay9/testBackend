@@ -21,7 +21,7 @@ function Register(props) {
     e.preventDefault();
 console.log(userRec);
     await axios
-      .post("http://localhost:3500/register/", userRec)
+      .post("https://verdant-churros-4a91af.netlify.app/register", userRec)
       .then((res) => {
         console.log("success");
         //navigate("/");
