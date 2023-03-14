@@ -14,7 +14,7 @@ function App() {
       </div>
       <div style={{ margin: "90px" }}>
         <Routes>
-          <Route path="register" element={<Register />}></Route>
+          <Route path="/register" element={<Register />}></Route>
         </Routes>
       </div>
     </Router>
