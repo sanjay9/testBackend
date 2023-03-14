@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cors(corsOptions));
 
  const usersRouter = require("./routes/users");
- app.use("/", usersRouter);
+ app.use("/testtest", usersRouter);
 
 
 module.exports.handler = serverless(app);
