@@ -21,5 +21,5 @@ app.use(cors(corsOptions));
  const usersRouter = require("./routes/users");
  app.use("/", usersRouter);
 
-app.listen(3500, () => console.log("Server Started"));
+
 module.exports.handler = serverless(app);
