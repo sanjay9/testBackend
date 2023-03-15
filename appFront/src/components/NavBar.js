@@ -50,8 +50,10 @@ function NavBar(props) {
                 <Button variant="success">Search</Button>
               </Form>
            
-            
+             
+              <Nav.Link href="upload" >Add Book +</Nav.Link>
               <Nav.Link href="register">Login</Nav.Link>
+              
             
           </Nav>
         </Navbar.Collapse>

@@ -5,6 +5,8 @@ import Form from "react-bootstrap/Form";
 
 import logo from "../media/bookepedia.gif";
 
+import { useNavigate } from "react-router-dom";
+
 function Register(props) {
   const [userRec, setUserRec] = React.useState({
     fname: "",
@@ -13,20 +15,34 @@ function Register(props) {
     password: "",
   });
 
+  let navigate = useNavigate();
+
   const onchange = (e) => {
     setUserRec({ ...userRec, [e.target.name]: e.target.value });
   };
 
   const SubmitRec = async (e) => {
     e.preventDefault();
-console.log(userRec);
+    console.log(userRec);
+    
+    let pwordRetype = document.getElementById('pwordRetype').value;
+
+    if( pwordRetype != userRec.password){
+        alert("Passwords do not match");
+        document.getElementById('pwordRetype').value = "";
+        setUserRec({ ...userRec, password: "" });
+        return;
+    }
+
+
     await axios
-      .post("https://verdant-churros-4a91af.netlify.app/register", userRec)
+      .post("http://localhost:3500/user/register/", userRec)
       .then((res) => {
         console.log("success");
-        //navigate("/");
+        alert(`Thank you ${userRec.fname}, your account has been created`);
+        navigate("/");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {console.log(err); alert("Please try again, an error occurred")});
   };
 
   return (
@@ -38,18 +54,18 @@ console.log(userRec);
       >
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>First Name</Form.Label>
-          <Form.Control onChange={onchange} value={userRec.fname}
+          <Form.Control required onChange={onchange} value={userRec.fname}
           name="fname" type="text" placeholder="Enter First Name" />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Last Name</Form.Label>
-          <Form.Control onChange={onchange} value={userRec.lname}
+          <Form.Control required onChange={onchange} value={userRec.lname}
           name="lname" type="text" placeholder="Enter Last Name" />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
-          <Form.Control onChange={onchange} value={userRec.email}
+          <Form.Control required onChange={onchange} value={userRec.email}
           name="email" type="email" placeholder="Enter email" />
           <Form.Text className="text-muted">
             We'll never share your email with anyone else.
@@ -58,13 +74,13 @@ console.log(userRec);
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
-          <Form.Control onChange={onchange} value={userRec.password}
+          <Form.Control required onChange={onchange} value={userRec.password}
           name="password" type="password" placeholder="Password" />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Re-type Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
+          <Form.Control id='pwordRetype' required type="password" placeholder="Password" />
         </Form.Group>
 
         <Button variant="primary" type="submit">
